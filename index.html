@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<title>Angular JS Tutorial</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="./controllers/mainPage.js"></script>
+	<style type="text/css">		
+		input,
+		select,
+		textarea {
+			max-width: 300px;
+		}
+	</style>
+	
+</script>
+</head>
+<body class="container" ng-app="tutorial"  ng-controller="mainPage" >
+	<div class="jumbotron" ng-controller="firstController">
+		<h3>{{title}}</h3>
+	</div>
+
+	<div class="container"  >
+
+		<ul class="list-inline">
+            <li><a href="#/">Default Route</a></li>
+            <li><a href="#/computers">Computer Route</a></li>
+            <li><a href="#/printers">Printers Route</a></li>
+            <li><a href="#/blabla">Unknown Route</a></li>
+        </ul>
+        <div class="well" ng-view></div>
+        <hr>
+		<form class="form-horizontal" role="form" name ="myForm" ng-submit="add()">
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="name">Name:<span> *</span></label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" name="name" ng-model="userDetails.name" placeholder="Enter Name" ng-required="required" >
+					 <span ng-show="myForm.name.$error.required">This is a required field</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="address">Address:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" ng-model ="userDetails.address" placeholder="Enter Your Address">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="email">Email: <span> *</span></label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" ng-model="userDetails.email" placeholder="Enter email" required >
+				</div>
+			</div>
+
+			<div class="form-group">        
+				<div class="col-sm-offset-3 col-sm-8">
+					<button type="submit" class="btn btn-primary btn-md" ng-click="add()">Add</button>
+					<button type="submit" class="btn btn-primary btn-md" ng-click="reset()">Reset</button>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+	<div>
+		<div class="panel panel-default">                
+              <div class="panel-heading"><span class="lead">List of Users </span></div>
+              <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>ID.</th>
+                              <th>Name</th>
+                              <th>Address</th>
+                              <th>Email</th>
+                              <th>Perform Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="u in listOfUsers">
+                              <td><span ng-bind="u.id"></span></td>
+                              <td><span ng-bind="u.name"></span></td>
+                              <td><span ng-bind="u.address"></span></td>
+                              <td><span ng-bind="u.email"></span></td>
+                              <td>
+                              <button type="button" ng-click="edit(u.id)" class="btn btn-success custom-width">Edit</button>  
+                              <button type="button" ng-click="remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+
+	</div>
+	
+
+</body>
+
+
+</html>
